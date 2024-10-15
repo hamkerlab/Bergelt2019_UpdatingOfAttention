@@ -1,0 +1,11 @@
+# project files
+.spyproject/
+
+# python related files
+*.pyc
+
+# created annarchy folder
+**/annarchy/
+
+# folder with saved results
+data/
