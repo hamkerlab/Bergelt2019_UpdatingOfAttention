@@ -79,7 +79,7 @@ def plotSetup(ep, sp, expType):
     plt.scatter(ep[0], ep[1], marker='x', s=500, color='red', linewidth=4)
 
     # stimulus position
-    for i in xrange(np.shape(sp)[0]):
+    for i in range(np.shape(sp)[0]):
         plt.scatter(sp[i][0], sp[i][1], marker=(10, 1, 0), s=500, color='green')
 
     # arrange plot
@@ -179,7 +179,7 @@ if __name__ == '__main__':
 
 
     ## Initialization ##
-    print "get data from", resultspath
+    print("get data from %s" % resultspath)
     # get experimental setup: saccade target, fixation point, stimulus position,
     # duration of simulation, time of saccade onset
     spatial, temporal = getSetup(params_setup)
@@ -267,4 +267,4 @@ if __name__ == '__main__':
         plt.savefig(dirMovie + "/" + '%0.3d' %(timestep) + ".tiff", dpi=100)
         plt.close(fig)
 
-    print "finished"
+    print("finished")

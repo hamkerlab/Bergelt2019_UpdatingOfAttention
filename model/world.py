@@ -50,7 +50,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
     '''
 
     ## init
-    print 'init inputsignals'
+    print('init inputsignals')
 
     results = {}
 
@@ -142,8 +142,8 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
             if needCopylayer:
                 pc_forFEF_sig[start_removal:] = np.zeros((size_h, size_v))
             # recreate previously existing eye position signal with proper suppression, if applicable
-            for j in xrange(t_PC_supp_on, t_PC_off):
-                if (j > t_PC_supp_on) and (j < t_PC_supp_off):
+            for j in range(t_PC_supp_on, t_PC_off):
+                if t_PC_supp_on < j < t_PC_supp_off:
                     supp = supp_strength
                 else:
                     supp = 1.0
@@ -153,8 +153,8 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
                 if needCopylayer and (k_PC > threshold):
                     pc_forFEF_sig[j] += xe0
             # add new eye position signal
-            for j in xrange(t_PC_on, duration):
-                if (j > t_PC_supp_on) and (j < t_PC_supp_off):
+            for j in range(t_PC_on, duration):
+                if t_PC_supp_on < j < t_PC_supp_off:
                     supp = supp_strength
                 else:
                     supp = 1.0
@@ -164,8 +164,8 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
                 if needCopylayer and (k_PC > threshold):
                     pc_forFEF_sig[j] += xe1
             # add gaussian decay
-            for j in xrange(t_PC_off+1, duration):
-                if(j > t_PC_supp_on) and (j < t_PC_supp_off):
+            for j in range(t_PC_off+1, duration):
+                if t_PC_supp_on < j < t_PC_supp_off:
                     supp = supp_strength
                 else:
                     supp = 1.0
@@ -177,8 +177,8 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
                 if needCopylayer and (k_PC * factor > threshold):
                     pc_forFEF_sig[j] = np.maximum(pc_forFEF_sig[j], xe_sig_new)
             # add linear buildup
-            for j in xrange(t_PC_on-1, max(0, t_PC_on), -1):
-                if (j > t_PC_supp_on) and (j < t_PC_supp_off):
+            for j in range(t_PC_on-1, max(0, t_PC_on), -1):
+                if t_PC_supp_on < j < t_PC_supp_off:
                     supp = supp_strength
                 else:
                     supp = 1.0
@@ -199,8 +199,8 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
             sig_CD = defParams['CD_sigma']
             rise = defParams['CD_rise']
             decay = defParams['CD_decay']
-            for j in xrange(t_CD-defParams['CD_range'], t_CD+defParams['CD_range']):
-                if (j >= 0) and (j < duration):
+            for j in range(t_CD-defParams['CD_range'], t_CD+defParams['CD_range']):
+                if 0 <= j < duration:
                     # CD-Signal is retinotop
                     xo = osig2d(size_h, size_v, eye1-eye0, j-t_CD, sig_CD, sig_CD, rise, decay, k_CD)
                     # are we above the (optional) threshold?
@@ -228,14 +228,14 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
                 supp_max = t + defParams['supp_max'] + defParams['ret_latency']
                 supp_release = t + dur + defParams['supp_release'] + defParams['ret_latency']
                 supp_off = t + dur + defParams['supp_off'] + defParams['ret_latency']
-                for j in xrange(supp_begin, supp_max):
+                for j in range(supp_begin, supp_max):
                     supp = (1.0 +
                             (defParams['supp_strength']-1.0)/(defParams['supp_max']-defParams['supp_begin'])
                             *(j-t-(defParams['supp_begin']+defParams['ret_latency'])))
                     suppressionMap[j] = min(suppressionMap[j], supp)
-                for j in xrange(supp_max, supp_release):
+                for j in range(supp_max, supp_release):
                     suppressionMap[j] = min(suppressionMap[j], defParams['supp_strength'])
-                for j in xrange(supp_release, supp_off):
+                for j in range(supp_release, supp_off):
                     supp = (defParams['supp_strength'] +
                             (1.0-defParams['supp_strength'])/(defParams['supp_off']-defParams['supp_release'])
                             *(j-t-dur-(defParams['supp_release']+defParams['ret_latency'])))
@@ -282,7 +282,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
     stimpos_old = set()
     eyepos_old = 0
     signal_old = np.zeros((size_h, size_v))
-    for tnew in xrange(duration-1):
+    for tnew in range(duration-1):
         if told > duration-1:
             break
         stimpos = set()
@@ -301,7 +301,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
                 break
             ret_end = min(tnew+defParams['ret_latency'], duration-1)
             # 1. generate the actual stimulus (using suppression and depression)
-            for t in xrange(ret_start, ret_end):
+            for t in range(ret_start, ret_end):
                 # use depression?
                 if defParams['ret_depression']:
                     depr = ret_depr(t-ret_start, defParams['ret_tau'], defParams['ret_d'])
@@ -314,7 +314,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
             if ret_end < duration-1:
                 decay = min(duration-1-ret_end, defParams['ret_decay'])
                 suppression = 1.0
-                for t in xrange(ret_end, ret_end+decay):
+                for t in range(ret_end, ret_end+decay):
                     # use depression?
                     if defParams['ret_depression']:
                         depr = ret_depr(t-ret_start, defParams['ret_tau'], defParams['ret_d'])
@@ -337,9 +337,9 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
 
     # cut off everything under 1e-5
     limit = 0.00001
-    print "set inputs under {0} to 0".format(limit)
-    for d in xrange(duration):
-        for i in xrange(size_h):
+    print("set inputs under %f to 0" % limit)
+    for d in range(duration):
+        for i in range(size_h):
             pc_sig[d, i] = [0 if r < limit else r for r in pc_sig[d, i]]
             cd_sig[d, i] = [0 if r < limit else r for r in cd_sig[d, i]]
             if needCopylayer:
@@ -353,7 +353,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
         # save the new generated inputs as an txt-file
         #ret_sig, pc_sig, (pc_forFEF_sig,) cd_sig, att_sig
         dirname = saveDir+'rates/'+subfolder+'/'
-        print 'save inputs at ' + dirname
+        print('save inputs at %s' % dirname)
         if not os.path.exists(dirname):
             os.makedirs(dirname)
 
@@ -367,7 +367,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
     # save eye position over time as an txt-file
     if 'save_eyePosition' in defParams and defParams['save_eyePosition']:
         dirname = saveDir+subfolder+'/'
-        print 'save eye position at ' + dirname
+        print('save eye position at %s' % dirname)
 
         filename = dirname + str(count) + '_eyepos.txt'
         dirname = os.path.dirname(filename)
@@ -375,7 +375,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
             os.makedirs(dirname)
 
         strToWrite = ''
-        for t in xrange(duration):
+        for t in range(duration):
             strToWrite += '{0}: {1}\n'.format(t, epMap[t])
         f = open(filename, 'w')
         f.write(strToWrite)
@@ -384,7 +384,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
     # save stimulus position over time as an txt-file
     if 'save_stimPosition' in defParams and defParams['save_stimPosition']:
         dirname = saveDir+subfolder+'/'
-        print 'save stimulus position at ' + dirname
+        print('save stimulus position at %s' % dirname)
 
         filename = dirname + str(count) + '_stimpos.txt'
         dirname = os.path.dirname(filename)
@@ -395,7 +395,7 @@ def init_inputsignals(precalcParam, saveDir, count='', subfolder=''):
         for k in spMap:
             strToWrite += 'event {0}: \n'.format(k)
             vec = spMap[k]
-            for t in xrange(duration):
+            for t in range(duration):
                 strToWrite += '{0}: {1}\n'.format(t, vec[t])
         f = open(filename, 'w')
         f.write(strToWrite)

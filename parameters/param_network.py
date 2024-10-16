@@ -155,5 +155,5 @@ defParams['save_stimPosition'] = 1
 defParams['vf_h'] = 40
 defParams['vf_v'] = 30
 ## number of neurons ##
-defParams['layer_size_h'] = defParams['vf_h']/2 + 1
-defParams['layer_size_v'] = defParams['vf_v']/2 + 1
+defParams['layer_size_h'] = defParams['vf_h']//2 + 1
+defParams['layer_size_v'] = defParams['vf_v']//2 + 1

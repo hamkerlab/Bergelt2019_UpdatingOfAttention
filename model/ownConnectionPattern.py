@@ -50,15 +50,15 @@ def all2all_exp2d(pre, post, factor, radius, mgd):
 
     numOfConnectionsCreated = 0
 
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numOfConnectionsCreated, fullOutput)
 
-        for post2 in xrange(postDimLength[1]):
+        for post2 in range(postDimLength[1]):
             pre_ranks = []
             values = []
 
-            for pre1 in xrange(preDimLength[0]):
-                for pre2 in xrange(preDimLength[1]):
+            for pre1 in range(preDimLength[0]):
+                for pre2 in range(preDimLength[1]):
                     # distance between 2 neurons
                     dist_h = (post1-pre1)*(post1-pre1)
                     dist_v = (post2-pre2)*(post2-pre2)
@@ -111,12 +111,12 @@ def all2all_exp4d(pre, post, factor, radius, mgd):
 
     numOfConnectionsCreated = 0
 
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numOfConnectionsCreated, fullOutput)
 
-        for post2 in xrange(postDimLength[1]):
-            for post3 in xrange(postDimLength[2]):
-                for post4 in xrange(postDimLength[3]):
+        for post2 in range(postDimLength[1]):
+            for post3 in range(postDimLength[2]):
+                for post4 in range(postDimLength[3]):
                     pre_ranks = []
                     values = []
 
@@ -133,10 +133,10 @@ def all2all_exp4d(pre, post, factor, radius, mgd):
                     max4 = min(preDimLength[3]-1, int(math.floor(post4+max_dist)))
 
                     # faster iteration in for-loops
-                    for pre1 in xrange(min1, max1+1): #xrange(preDimLength[0]):
-                        for pre2 in xrange(min2, max2+1): #xrange(preDimLength[1]):
-                            for pre3 in xrange(min3, max3+1): #xrange(preDimLength[2]):
-                                for pre4 in xrange(min4, max4+1): #xrange(preDimLength[3]):
+                    for pre1 in range(min1, max1+1): #range(preDimLength[0]):
+                        for pre2 in range(min2, max2+1): #range(preDimLength[1]):
+                            for pre3 in range(min3, max3+1): #range(preDimLength[2]):
+                                for pre4 in range(min4, max4+1): #range(preDimLength[3]):
                                     # distance between 2 neurons
                                     dist_h1 = (post1-pre1)*(post1-pre1)
                                     dist_h2 = (post2-pre2)*(post2-pre2)
@@ -196,10 +196,10 @@ def gaussian2dTo4d_h(pre, post, mv, radius, mgd):
     numOfConnectionsCreated = 0
 
     #w_post
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numOfConnectionsCreated, fullOutput)
 
-        for post2 in xrange(postDimLength[1]):
+        for post2 in range(postDimLength[1]):
 
             # faster iteration in for-loops
             min1 = max(0, int(math.ceil(post1-max_dist)))
@@ -208,13 +208,13 @@ def gaussian2dTo4d_h(pre, post, mv, radius, mgd):
             max2 = min(preDimLength[1]-1, int(math.floor(post2+max_dist)))
 
             #h_post
-            for post3  in xrange(postDimLength[2]):
-                for post4 in xrange(postDimLength[3]):
+            for post3  in range(postDimLength[2]):
+                for post4 in range(postDimLength[3]):
                     pre_ranks = []
                     values = []
 
-                    for pre1 in xrange(min1, max1+1): #xrange(preDimLength[0]):
-                        for pre2 in xrange(min2, max2+1): #xrange(preDimLength[1]):
+                    for pre1 in range(min1, max1+1): #range(preDimLength[0]):
+                        for pre2 in range(min2, max2+1): #range(preDimLength[1]):
                             # distance between 2 neurons
                             dist_h = (post1-pre1)*(post1-pre1)
                             dist_v = (post2-pre2)*(post2-pre2)
@@ -270,13 +270,13 @@ def gaussian2dTo4d_v(pre, post, mv, radius, mgd):
     numOfConnectionsCreated = 0
 
     #w_post
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numOfConnectionsCreated, fullOutput)
 
-        for post2  in xrange(postDimLength[1]):
+        for post2  in range(postDimLength[1]):
             #h_post
-            for post3  in xrange(postDimLength[2]):
-                for post4  in xrange(postDimLength[3]):
+            for post3  in range(postDimLength[2]):
+                for post4  in range(postDimLength[3]):
                     pre_ranks = []
                     values = []
 
@@ -287,8 +287,8 @@ def gaussian2dTo4d_v(pre, post, mv, radius, mgd):
                     max2 = min(preDimLength[1]-1, int(math.floor(post4+max_dist)))
 
                     # faster iteration in for-loops
-                    for pre1 in xrange(min1, max1+1): #xrange(preDimLength[0]):
-                        for pre2 in xrange(min2, max2+1): #xrange(preDimLength[1]):
+                    for pre1 in range(min1, max1+1): #range(preDimLength[0]):
+                        for pre2 in range(min2, max2+1): #range(preDimLength[1]):
                             # distance between 2 neurons
                             dist_h = (post3-pre1)*(post3-pre1)
                             dist_v = (post4-pre2)*(post4-pre2)
@@ -344,10 +344,10 @@ def gaussian4dTo2d_h(pre, post, mv, radius, mgd):
     numOfConnectionsCreated = 0
 
     # w_post
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numOfConnectionsCreated, fullOutput)
 
-        for post2  in xrange(postDimLength[1]):
+        for post2  in range(postDimLength[1]):
             pre_ranks = []
             values = []
 
@@ -359,8 +359,8 @@ def gaussian4dTo2d_h(pre, post, mv, radius, mgd):
 
             # w_pre
             # faster iteration in for-loops
-            for pre1 in xrange(min1, max1+1): #xrange(preDimLength[0]):
-                for pre2 in xrange(min2, max2+1): #xrange(preDimLength[1]):
+            for pre1 in range(min1, max1+1): #range(preDimLength[0]):
+                for pre2 in range(min2, max2+1): #range(preDimLength[1]):
                     # distance between 2 neurons
                     dist_h = (post1-pre1)*(post1-pre1)
                     dist_v = (post2-pre2)*(post2-pre2)
@@ -371,8 +371,8 @@ def gaussian4dTo2d_h(pre, post, mv, radius, mgd):
 
                         if val > MIN_CONNECTION_VALUE:
                             # h_pre
-                            for pre3  in xrange(preDimLength[2]):
-                                for pre4  in xrange(preDimLength[3]):
+                            for pre3  in range(preDimLength[2]):
+                                for pre4  in range(preDimLength[3]):
                                     # connect
                                     numOfConnectionsCreated += 1
                                     pre_rank = pre.rank_from_coordinates((pre1, pre2, pre3, pre4))
@@ -419,13 +419,13 @@ def gaussian2dTo4d_diag(pre, post, mv, radius, mgd):
     numConnectionCreated = 0
 
     # w_post
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numConnectionCreated, fullOutput)
 
-        for post2 in xrange(postDimLength[1]):
+        for post2 in range(postDimLength[1]):
             # h_post
-            for post3 in xrange(postDimLength[2]):
-                for post4 in xrange(postDimLength[3]):
+            for post3 in range(postDimLength[2]):
+                for post4 in range(postDimLength[3]):
                     pre_ranks = []
                     values = []
 
@@ -437,8 +437,8 @@ def gaussian2dTo4d_diag(pre, post, mv, radius, mgd):
 
                     # w_pre
                     # faster iteration in for-loops
-                    for pre1 in xrange(min1, max1+1): #xrange(preDimLength[0]):
-                        for pre2 in xrange(min2, max2+1): #xrange(preDimLength[1]):
+                    for pre1 in range(min1, max1+1): #range(preDimLength[0]):
+                        for pre2 in range(min2, max2+1): #range(preDimLength[1]):
                             # distance between 2 neurons
                             dist_h = (pre1-post1-post3+offset_h)*(pre1-post1-post3+offset_h)
                             dist_v = (pre2-post2-post4+offset_v)*(pre2-post2-post4+offset_v)
@@ -496,16 +496,16 @@ def gaussian4dTo2d_diag(pre, post, mv, radius, mgd):
     numOfConnectionsCreated = 0
 
     # w_post
-    for post1 in xrange(postDimLength[0]):
+    for post1 in range(postDimLength[0]):
         dout.print_conn(post1, postDimLength[0], numOfConnectionsCreated, fullOutput)
 
-        for post2  in xrange(postDimLength[1]):
+        for post2  in range(postDimLength[1]):
             pre_ranks = []
             values = []
 
             # w_pre
-            for pre1 in xrange(preDimLength[0]):
-                for pre2 in xrange(preDimLength[1]):
+            for pre1 in range(preDimLength[0]):
+                for pre2 in range(preDimLength[1]):
 
                     # for speedup
                     min1 = max(0, int(math.ceil(post1+offset_h-pre1-max_dist)))
@@ -515,8 +515,8 @@ def gaussian4dTo2d_diag(pre, post, mv, radius, mgd):
 
                     # h_pre
                     # faster iteration in for-loops
-                    for pre3 in xrange(min1, max1+1): #xrange(preDimLength[2]):
-                        for pre4 in xrange(min2, max2+1): #xrange(preDimLength[3]):
+                    for pre3 in range(min1, max1+1): #range(preDimLength[2]):
+                        for pre4 in range(min2, max2+1): #range(preDimLength[3]):
                             # distance between 2 neurons
                             dist_h = (post1-pre1-pre3+offset_h)*(post1-pre1-pre3+offset_h)
                             dist_v = (post2-pre2-pre4+offset_v)*(post2-pre2-pre4+offset_v)
@@ -574,20 +574,20 @@ def gaussian4d_diagTo4d_v(pre, post, mv, radius, mgd):
     numConnectionCreated = 0
 
     #w_post
-    for post1 in xrange(postDimLength[0]):
-        for post2 in xrange(postDimLength[1]):
+    for post1 in range(postDimLength[0]):
+        for post2 in range(postDimLength[1]):
             dout.print_conn(post1*postDimLength[1]+post2, postDimLength[0]*postDimLength[1],
                             numConnectionCreated, fullOutput)
 
             #h_post
-            for post3 in xrange(postDimLength[2]):
-                for post4 in xrange(postDimLength[3]):
+            for post3 in range(postDimLength[2]):
+                for post4 in range(postDimLength[3]):
                     pre_ranks = []
                     values = []
 
                     # w_pre
-                    for pre1 in xrange(preDimLength[0]):
-                        for pre2 in xrange(preDimLength[1]):
+                    for pre1 in range(preDimLength[0]):
+                        for pre2 in range(preDimLength[1]):
                             # for speedup
                             min1 = max(0, int(math.ceil(post3+offset_h-pre1-max_dist)))
                             max1 = min(preDimLength[2]-1,
@@ -598,8 +598,8 @@ def gaussian4d_diagTo4d_v(pre, post, mv, radius, mgd):
 
                             # h_pre
                             # faster iteration in for-loops
-                            for pre3 in xrange(min1, max1+1): #xrange(preDimLength[2]):
-                                for pre4 in xrange(min2, max2+1): #xrange(preDimLength[3]):
+                            for pre3 in range(min1, max1+1): #range(preDimLength[2]):
+                                for pre4 in range(min2, max2+1): #range(preDimLength[3]):
                                     # distance between 2 neurons
                                     dist_h = (pre1+pre3-post3-offset_h)*(pre1+pre3-post3-offset_h)
                                     dist_v = (pre2+pre4-post4-offset_v)*(pre2+pre4-post4-offset_v)

@@ -55,7 +55,7 @@ def vanWetterVanOpstal(duration, t, FP, ST, epMap, loadedParam, *args):
         A = 1.0 / (1.0 - math.exp(-T/m0))
         E = FP      # start is fixation point
         saccade_in_progress = True
-        for j in xrange(duration-t):
+        for j in range(duration-t):
             E_previous = E
             E = (FP + direction*(m0 * math.log((A * math.exp(vpk * j / m0)) /
                                                (1.0 + A * math.exp((vpk * j - T)/m0)))))
@@ -73,7 +73,7 @@ def vanWetterVanOpstal(duration, t, FP, ST, epMap, loadedParam, *args):
                 if numpy.linalg.norm(E - ST) < loadedParam['sac_offset_threshold']:
                     sac_has_ended = True
             else:
-                print "NO SACCADE TERMINATION DEFINED"
+                print("NO SACCADE TERMINATION DEFINED")
                 if E == ST:
                     sac_has_ended = True
 

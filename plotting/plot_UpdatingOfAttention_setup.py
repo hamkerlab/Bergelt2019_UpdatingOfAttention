@@ -109,7 +109,7 @@ def plotRates(r, ep, sp):
                              label='eye position')
     # stimulus position
     if sp.any():
-        for i in xrange(np.shape(sp)[0]):
+        for i in range(np.shape(sp)[0]):
             sp_scatter = plt.scatter(sp[i][0], sp[i][1], marker=(10, 1, 0), s=500, color='green',
                                      label='stimulus position')
     else:
@@ -156,7 +156,7 @@ def plotRates(r, ep, sp):
         patches.append(sp_scatter)
     # create patches as legend for rates
     for i in labels:
-        patches.append(mpatches.Patch([0, 0], color=cdict_label[i], label=labels[i]))
+        patches.append(mpatches.Patch(color=cdict_label[i], label=labels[i]))
     plt.legend(handles=patches, fontsize=fs_text)
 
 
@@ -193,7 +193,7 @@ if __name__ == '__main__':
 
 
     ## Initialization ##
-    print "get data from", resultspath
+    print("get data from %s" % resultspath)
     # get experimental setup: saccade target, fixation point, attention position,
     # duration of simulation, time of saccade onset
     spatial, temporal = getSetup(params_setup)
@@ -213,7 +213,7 @@ if __name__ == '__main__':
                                                 [visualField_h, visualField_v], display)
     # Which input rates are non-zero?
     activeRates = []
-    for sig, rate in dict_rates.iteritems():
+    for sig, rate in dict_rates.items():
         if np.max(rate) > 0:
             activeRates.append(sig)
 
@@ -281,4 +281,4 @@ if __name__ == '__main__':
             plt.close(fig)
 
 
-    print "finished"
+    print("finished")

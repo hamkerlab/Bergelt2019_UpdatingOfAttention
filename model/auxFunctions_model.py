@@ -52,8 +52,8 @@ class ProgressOutput:
             self.prename = args[1].name
             self.postname = args[2].name
 
-            print "Create Connection {0} -> {1} with pattern {2}".format(self.prename, self.postname,
-                                                                         self.connection)
+            print("Create Connection %s -> %s with pattern %s" % (self.prename, self.postname,
+                                                                  self.connection))
 
 
     def print_sim(self, value, maxvalue):
@@ -75,8 +75,7 @@ class ProgressOutput:
         else:
             estimatedtimestr = "--:--"
 
-        print "{0: <7} |{1: <7}".format(
-            timestr, estimatedtimestr)
+        print("{0: <7} |{1: <7}".format(timestr, estimatedtimestr))
 
     def print_conn(self, value, maxvalue, connectioncreated, full):
         '''
@@ -100,9 +99,9 @@ class ProgressOutput:
             else:
                 estimatedtimestr = "--:--"
 
-            print "{0} | {1} -> {2} | {3:.4f}% | {4: <7} | {5: <7} | {6: >15}".format(
-                self.connection, self.prename, self.postname,
-                value*100.0/(maxvalue), timestr, estimatedtimestr, connectioncreated)
+            print("{0} | {1} -> {2} | {3:.4f}% | {4: <7} | {5: <7} | {6: >15}".format(
+                self.connection, self.prename, self.postname, value*100.0/(maxvalue), timestr,
+                estimatedtimestr, connectioncreated))
 
         else:
             sys.stdout.write('.')
@@ -171,10 +170,10 @@ def recursively_save_dict_contents_to_group(h5file, path, dic):
         if not isinstance(key, str):
             raise ValueError("dict keys must be strings to save to hdf5")
         # save strings, numpy.int64, and numpy.float64 types
-        if isinstance(item, (np.int64, np.float64, str, np.float, float, np.float32, int)):
+        if isinstance(item, (np.int64, np.float64, str, float, np.float32, int)):
             #print( 'here' )
             h5file[path + key] = item
-            if not h5file[path + key].value == item:
+            if not h5file[path + key][()] == item:
                 raise ValueError('The data representation in the HDF5 file does not match the original dict.')
         # save numpy arrays
         elif isinstance(item, np.ndarray):
@@ -183,7 +182,7 @@ def recursively_save_dict_contents_to_group(h5file, path, dic):
             except:
                 item = np.array(item).astype('|S9')
                 h5file[path + key] = item
-            if not np.array_equal(h5file[path + key].value, item):
+            if not np.array_equal(h5file[path + key][()], item):
                 raise ValueError('The data representation in the HDF5 file does not match the original dict.')
         # save dictionaries
         elif isinstance(item, dict):
@@ -205,7 +204,7 @@ def recursively_load_dict_contents_from_group(h5file, path):
     ans = {}
     for key, item in h5file[path].items():
         if isinstance(item, h5py._hl.dataset.Dataset):
-            ans[key] = item.value
+            ans[key] = item[()]
         elif isinstance(item, h5py._hl.group.Group):
             ans[key] = recursively_load_dict_contents_from_group(h5file, path + key + '/')
     return ans

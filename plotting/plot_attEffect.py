@@ -79,7 +79,7 @@ def plotAttEffect():
             plt.xticks(time_scaled[::100])
             plt.xlabel('Time relative to saccade onset (ms)', fontsize=fs_title)
             plt.ylim(0, max_value)
-            plt.yticks(np.linspace(0, max_value, max_value*10+1))
+            plt.yticks(np.linspace(0, max_value, int(max_value*10+1)))
             if subPlotNr == 1:
                 plt.ylabel('Firing rate', fontsize=fs_title)
                 # legend
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 
     ## Initialization ##
-    print "get data from", resultspath
+    print("get data from %s" % resultspath)
     # get experimental setup: saccade target, fixation point, attention position,
     # duration of simulation, time of saccade onset
     spatial, temporal = getSetup(params_setup)
@@ -153,7 +153,7 @@ if __name__ == '__main__':
         attention[p]['sum'] = np.zeros(temporal['duration'])
         for l in layers_4d:
             att = np.zeros(temporal['duration'])
-            for t in xrange(temporal['duration']):
+            for t in range(temporal['duration']):
                 neuron = [deg2idx(spatial[p][0]-eyepos[t][0], numNeurons_h, visualField_h),
                           deg2idx(spatial[p][1]-eyepos[t][1], numNeurons_v, visualField_v)]
                 att[t] = proj_space[l][t, neuron[0], neuron[1]]

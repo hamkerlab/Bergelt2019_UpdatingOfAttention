@@ -3,7 +3,9 @@
 The repository contains all relevant scripts to reproduce the results and figures published in the article
 "Spatial updating of attention across eye movements: A neuro-computational approach" by J. Bergelt and F. H. Hamker, sumbitted in Journal of Vision
 
-The source code is implemented in Python 2.7. The simulations were done with the neural simulator ANNarchy 4.6.
+The source code is implemented in Python 2.7. The simulations were done with the neural simulator ANNarchy 4.6.  
+**Update**  
+The source code is implemented in Python 3.10. The simulations were done with the neural simulator ANNarchy 4.8.
 
 To start a simulation, run either predictiveRemapping.py or UpdatingOfAttention.py (in subfolder "model").
 The neuro-computational model is defined in network.py and ownConnectionPattern.py (in subfolder "model").
@@ -34,4 +36,7 @@ To create the figures, run one of the scripts plot_*  (in subfolder "plotting").
 ## Dependencies
 
 Neural Simulator ANNarchy 4.6  
-python 2.7, numpy 1.14.5, scipy 1.2.0, matplotlib 2.2.3, h5py 2.6.0
+python 2.7, numpy 1.14.5, scipy 1.2.0, matplotlib 2.2.3, h5py 2.6.0  
+**Update**  
+Neural Simulator ANNarchy 4.8  
+python 3.10, numpy 1.26.1, scipy 1.14.1, matplotlib 3.9.2, h5py 3.11.0

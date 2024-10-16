@@ -22,7 +22,8 @@ auxiliary functions for plotting scripts:
 #### imports ####
 #################
 import sys
-import pylab as plt
+import matplotlib as mpl
+from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 
 sys.path.append('../model/')
@@ -113,7 +114,7 @@ def getEyepos(inputfile, t):
 
     # read out data from file
     numLines = len(content)
-    for i in xrange(numLines):
+    for i in range(numLines):
         splittedLine = content[i].split()
         h = splittedLine[1].replace('[', '')
         v = splittedLine[2].replace(']', '')
@@ -141,16 +142,16 @@ def getStimpos(inputfile, t):
     f.close()
 
     # init
-    numEvents = len(content) / (t+1)
+    numEvents = len(content) // (t+1)
     stimpos = np.zeros((t, numEvents, 2))
     events = []
 
     # read out data from file
-    for k in xrange(numEvents):
+    for k in range(numEvents):
         splittedLine = content[0].split()
         events.append(splittedLine[1])
         content.pop(0)
-        for i in xrange(t):
+        for i in range(t):
             currentLine = content[0].replace('-', ' -')
             splittedLine = currentLine.split()
             content.pop(0)
@@ -188,7 +189,7 @@ def getData_setup(path, duration, numNeurons, visualField, display):
     try:
         sp, _ = getStimpos(path + '_stimpos.txt', duration)
     except IOError:
-        print "no stimulus"
+        print("no stimulus")
         sp = np.full((duration, 1, 2), None)
 
 
@@ -263,7 +264,7 @@ def getData_results(path, duration, numNeurons, visualField, display):
     try:
         sp, _ = getStimpos(path + '_stimpos.txt', duration)
     except IOError:
-        print "no stimulus"
+        print("no stimulus")
         sp = np.full((duration, 1, 2), None)
 
 
@@ -328,7 +329,7 @@ def getData_rates(path, duration, numNeurons, visualField, display):
     try:
         sp, _ = getStimpos(path + '_stimpos.txt', duration)
     except IOError:
-        print "no stimulus"
+        print("no stimulus")
         sp = np.full((duration, 1, 2), None)
 
 
@@ -431,7 +432,7 @@ def defineColormaps(expTpye=''):
                                 (1.0, 1.0, 1.0))
                      }
     else:
-        print "No valid experiment type given. Use standard color map."
+        print("No valid experiment type given. Use standard color map.")
         cdict_blue = {'red':   ((0.0, 1.0, 1.0),
                                 (1.0, 0.0, 0.0)),
                       'green': ((0.0, 1.0, 1.0),
@@ -468,10 +469,10 @@ def defineColormaps(expTpye=''):
                    }
 
     # register color maps
-    plt.register_cmap(name='RedAlpha', data=cdict_red)
-    plt.register_cmap(name='BlueAlpha', data=cdict_blue)
-    plt.register_cmap(name='GreenAlpha', data=cdict_green)
-    plt.register_cmap(name='OrangeAlpha', data=cdict_orange)
+    mpl.colormaps.register(cmap=LinearSegmentedColormap(name='RedAlpha', segmentdata=cdict_red))
+    mpl.colormaps.register(cmap=LinearSegmentedColormap(name='BlueAlpha', segmentdata=cdict_blue))
+    mpl.colormaps.register(cmap=LinearSegmentedColormap(name='GreenAlpha', segmentdata=cdict_green))
+    mpl.colormaps.register(cmap=LinearSegmentedColormap(name='OrangeAlpha', segmentdata=cdict_orange))
 
 
     ## legend ##

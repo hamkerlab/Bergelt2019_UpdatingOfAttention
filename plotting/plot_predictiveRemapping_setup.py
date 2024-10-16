@@ -109,7 +109,7 @@ def plotRates(r, ep, sp, leg):
     ep_scatter = plt.scatter(ep[0], ep[1], marker='x', s=500, color='red', linewidth=4,
                              label='eye position')
     # stimulus position
-    for i in xrange(np.shape(sp)[0]):
+    for i in range(np.shape(sp)[0]):
         sp_scatter = plt.scatter(sp[i][0], sp[i][1], marker=(10, 1, 0), s=500, color='green',
                                  label='stimulus position')
 
@@ -147,7 +147,7 @@ def plotRates(r, ep, sp, leg):
         patches = [ep_scatter, sp_scatter]
         # create patches as legend for rates
         for i in labels:
-            patches.append(mpatches.Patch([0, 0], color=cdict_label[i], label=labels[i]))
+            patches.append(mpatches.Patch(color=cdict_label[i], label=labels[i]))
         plt.legend(handles=patches, loc='lower right', fontsize=fs_text)
 
 
@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
 
     ## Initialization ##
-    print "get data from", resultspath
+    print("get data from %s" % resultspath)
     # get experimental setup: saccade target, fixation point, stimulus position,
     # duration of simulation, time of saccade onset
     spatial, temporal = getSetup(params_setup)
@@ -204,7 +204,7 @@ if __name__ == '__main__':
                                                                    display)
         # Which input rates are non-zero?
         activeRates[exp] = []
-        for sig, rate in dict_rates[exp].iteritems():
+        for sig, rate in dict_rates[exp].items():
             if np.max(rate) > 0:
                 activeRates[exp].append(sig)
 
@@ -219,7 +219,7 @@ if __name__ == '__main__':
         # left panel fixation task, right panel saccade task
         counter = 1
         for exp in expTypes:
-            ax = plt.subplot(1, 2, counter)
+            plt.subplot(1, 2, counter)
 
             # setup (points, receptive fields)
             plotSetup(exp)
@@ -232,6 +232,7 @@ if __name__ == '__main__':
                       plotLegend[exp])
 
             # background
+            #ax = plt.gca()
             #ax.set_facecolor((0.8, 0.8, 0.8))
 
             # title
@@ -264,7 +265,7 @@ if __name__ == '__main__':
             # left panel fixation task, right panel saccade task
             counter = 1
             for exp in expTypes:
-                ax = plt.subplot(1, 2, counter)
+                plt.subplot(1, 2, counter)
 
                 # setup (points, recetive fields)
                 plotSetup(exp)
@@ -277,6 +278,7 @@ if __name__ == '__main__':
                           plotLegend[exp])
 
                 # background
+                # ax = plt.gca()
                 #ax.set_facecolor((0.8, 0.8, 0.8))
 
                 # title
@@ -289,4 +291,4 @@ if __name__ == '__main__':
             plt.savefig(dirMovie + "/" + '%0.3d' %(timestep) + ".tiff", dpi=100)
             plt.close(fig)
 
-    print "finished"
+    print("finished")

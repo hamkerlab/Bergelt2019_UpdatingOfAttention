@@ -96,12 +96,12 @@ def precalcEvents():
     # get order by sorting events according to time
     eventtimes = []
     eventnames = []
-    for i in xrange(num_events):
+    for i in range(num_events):
         eventtimes.append(events['EVT' + str(i)]['time'])
         eventnames.append('EVT' + str(i))
     order = sorted(range(num_events), key=lambda x: eventtimes[x])
     eventsOrderedByTime = []
-    for i in xrange(num_events):
+    for i in range(num_events):
         eventsOrderedByTime.append(eventnames[order[i]])
     events['order'] = eventsOrderedByTime
 
@@ -125,7 +125,7 @@ if __name__ == '__main__':
         task = 'fixation'
     # folder for saving results
     saveDir = '../data/predRemapping/' + task + '/'
-    print "save at", saveDir
+    print("save at %s" % saveDir)
 
     precalcParam = {}
     duration = defParams['t_end'] - defParams['t_begin'] + 1
@@ -148,11 +148,11 @@ if __name__ == '__main__':
 
 
     ## Run the simulation ##
-    print 'running simulation for', duration, 'ms'
+    print('running simulation for %d ms' % duration)
     dout = ProgressOutput()
     time3 = time.time()
 
-    for t in xrange(duration):
+    for t in range(duration):
         if not t%100:
             dout.print_sim(t, duration)
 
@@ -160,12 +160,12 @@ if __name__ == '__main__':
         ANN.step()
 
     time4 = time.time()
-    print "finished simulation"
+    print("finished simulation")
 
 
     ## Save results ##
     # get recorded firing rates
-    print "save rates"
+    print("save rates")
     recorded_rates = {}
     for layer in monitors:
         # firing rates of neurons over time
@@ -177,9 +177,9 @@ if __name__ == '__main__':
 
 
     ## Finish ##
-    print "Create: %3d:%02d" % ((time1-time0) / 60, (time1-time0) % 60)
-    print "Compile: %3d:%02d" % ((time2-time1) / 60, (time2-time1) % 60)
-    print "Simulate: %3d:%02d" % ((time4-time3) / 60, (time4-time3) % 60)
-    print "Save: %3d:%02d" % ((time5-time4) / 60, (time5-time4) % 60)
+    print("Create: %3d:%02d" % ((time1-time0) / 60, (time1-time0) % 60))
+    print("Compile: %3d:%02d" % ((time2-time1) / 60, (time2-time1) % 60))
+    print("Simulate: %3d:%02d" % ((time4-time3) / 60, (time4-time3) % 60))
+    print("Save: %3d:%02d" % ((time5-time4) / 60, (time5-time4) % 60))
 
-    print 'finished'
+    print('finished')
